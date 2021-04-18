@@ -27,8 +27,8 @@ const tokenVerify = (req, res, next) => {
             return res.status(401).send(verification_msg);
         } else if (decodeData) {
             req.decoded = decodeData;
-            console.log('decoded data : ', req.decoded);
-            console.log('Token matched')
+            // console.log('decoded data : ', req.decoded);
+            // console.log('Token matched')
             next();
         }
     })

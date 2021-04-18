@@ -1,0 +1,68 @@
+const userModel = require('./userModel')
+const bookModel = require('./bookModel')
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const cartSchema = new Schema({
+
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    book_ID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'bookDB'
+    },
+    quantity: {
+        type: Number,
+        default: 1
+    }
+})
+
+let cartModel = mongoose.model('cart_Items', cartSchema)
+
+
+class CartModel {
+
+    addToCart = (addToCart_data, callback, next) => {
+        console.log("Data is", addToCart_data);
+        cartModel.find({
+            "$and": [
+                { userId: addToCart_data.userId },
+                { book_ID: addToCart_data.book_id }
+            ]
+        }).then(data => {
+            if (data.length !== 0) {
+                let prevQuantity = data[0].quantity + 1
+                let updatedCartData = {
+                    quantity: prevQuantity
+                }
+                cartModel.findByIdAndUpdate({ _id: data[0]._id }, updatedCartData, { new: true }).then(data => {
+                    callback({ message: 'Successfully added to the cart', success: true, data: data, status: 200 });
+                }).catch(err => {
+                    callback({ message: 'Error failed to add to the cart', success: true, err: err, status: 400 })
+                })
+            } else if (data.length == 0) {
+
+                let cartItemData = {
+                    userId: addToCart_data.userId,
+                    book_ID: addToCart_data.book_id,
+
+                }
+                return cartModel.create(cartItemData)
+                    .then(data => {
+                        callback({ message: 'Successfully added to the cart', success: true, data: data, status: 200 });
+                    }).catch(err => {
+                        callback({ message: 'Error failed to add to the cart', success: true, err: err, status: 400 });
+                    })
+
+            }
+        }).catch(err => {
+            next(err)
+        })
+    }
+
+
+
+}
+module.exports = new CartModel();

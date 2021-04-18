@@ -13,8 +13,8 @@ class BookService {
                 return ({ success: false, message: "Failed to add book in record", status: statusCode.BadRequest });
             })
     }
-    updateBook = (id, newData) => {
 
+    updateBook = (id, newData) => {
         return bookModel.updateBook(id, newData)
             .then((result) => {
                 console.log(id);
@@ -24,6 +24,7 @@ class BookService {
                 return ({ message: "Book is Not found", error: error, status: statusCode.NotFound });
             })
     }
+
     deleteBook(id) {
         return bookModel.deleteBook(id)
             .then((result) => {

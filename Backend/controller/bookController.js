@@ -21,7 +21,7 @@ class bookController {
                     })
             } else {
                 response.flag = false;
-                response.message = "You are Not authorized to Update book";
+                response.message = "You are Not authorized to add book";
                 res.status(401).send(response);
 
             }
@@ -40,7 +40,7 @@ class bookController {
             if (role === "Admin") {
                 bookService.updateBook(id, newData)
                     .then((result) => {
-                        response.data = result.data;
+                        response.data = result.newData;
                         response.flag = true;
                         response.message = result.message;
                         res.status(result.status).send(response);
@@ -78,7 +78,7 @@ class bookController {
                     })
             } else {
                 response.flag = false;
-                response.message = "You are Not authorized to Update book";
+                response.message = "You are Not authorized to delete book";
                 res.status(401).send(response);
 
             }
