@@ -28,7 +28,6 @@ class CartController {
     getAllItems(req, res, next) {
         try {
             let id = req.decoded._id;
-            console.log(id);
             cartService.getAllItems(id)
                 .then((result) => {
                     response.data = result.data;
@@ -42,6 +41,24 @@ class CartController {
                 });
         } catch (error) {
             next(error);
+        }
+    }
+    deleteItems(req, res, next) {
+        try {
+            let id = req.params.id;
+            cartService.deleteItems(id)
+                .then((result) => {
+                    response.flag = true;
+                    response.data = result.data;
+                    response.message = result.message;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.flag = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
+        } catch (error) {
+            next(error)
         }
     }
 }

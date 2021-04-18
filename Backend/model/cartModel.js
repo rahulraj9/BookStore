@@ -20,7 +20,7 @@ const cartSchema = new Schema({
 })
 
 let cartModel = mongoose.model('cart_Items', cartSchema)
-module.exports = cartModel
+
 
 
 class CartModel {
@@ -52,12 +52,10 @@ class CartModel {
                 }
                 return cartModel.create(cartItemData)
                     .then(data => {
-                        console.log("cartItemData is", cartItemData);
                         callback({ message: 'Successfully added to the cart', success: true, data: data, status: 200 });
                     }).catch(err => {
                         callback({ message: 'Error failed to add to the cart', success: true, err: err, status: 400 });
                     })
-
             }
         }).catch(err => {
             console.log(err);
@@ -68,14 +66,22 @@ class CartModel {
         return cartModel.find(id)
             .populate('book_ID')
             .then(result => {
-                console.log("hi", result);
                 return result;
             })
             .catch(error => {
-                console.log("hi error");
                 return error;
             })
 
+    }
+
+    deleteItems(id) {
+        return cartModel.findByIdAndRemove(id)
+            .then(result => {
+                return result;
+            })
+            .catch(error => {
+                return error;
+            })
     }
 
 

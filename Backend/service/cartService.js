@@ -1,18 +1,14 @@
 const cartModel = require('../model/cartModel')
-    // const cartModel = require('../Model/cartModel')
 let statusCode = require('../middleware/httpStatusCode.json')
 
 
 class CartService {
 
     addToCart = (cartData, callback) => {
-        // console.log("hello", cartData);
         cartModel.addToCart(cartData, (data, err) => {
             if (data) {
-                // console.log('data in services : ', data)
                 callback(data)
             } else if (err) {
-                // console.log('err in services : ', err)
                 callback(err)
             }
         })
@@ -29,6 +25,20 @@ class CartService {
                 return ({ message: "Note Record is Not found", error: error, status: statusCode.NotFound });
             })
     }
+
+    deleteItems(id) {
+        return cartModel.deleteItems(id)
+            .then((result) => {
+                if (result.length == 0) {
+                    return ({ message: "No Item", data: result, status: statusCode.BadRequest });
+                }
+                return ({ message: "Item Remove Successfully from cart", data: result, status: statusCode.OK });
+            })
+            .catch((error) => {
+                return ({ message: "No Item found in Record", error: error, status: statusCode.NotFound });
+            })
+    }
+
 
 
 }
