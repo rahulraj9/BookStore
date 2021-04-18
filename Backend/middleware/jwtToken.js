@@ -6,7 +6,7 @@ let response = {}
 
 
 const tokenGeneration = (payload, next) => {
-    let token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '1hr' })
+    let token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '441hr' })
     response.token = token
     infoLogger.info(JSON.stringify(response));
     return token;
@@ -15,7 +15,7 @@ const tokenGeneration = (payload, next) => {
 
 const tokenVerify = (req, res, next) => {
     var token = req.header('token') || req.params.token;
-    console.log('token : ', token)
+    // console.log('token : ', token)
 
     let verification_msg = {
         "message": "Unauthorized user"

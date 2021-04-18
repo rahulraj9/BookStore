@@ -17,5 +17,5 @@ route.delete('/deletebook/:id', jwtToken.tokenVerify, bookController.deleteBook)
 
 
 route.post('/add_to_cart/:id', jwtToken.tokenVerify, cartItemsController.addToCart)
-
+route.get('/getCartitem', jwtToken.tokenVerify, cartItemsController.getAllItems)
 module.exports = route

@@ -20,22 +20,23 @@ const cartSchema = new Schema({
 })
 
 let cartModel = mongoose.model('cart_Items', cartSchema)
+module.exports = cartModel
 
 
 class CartModel {
 
-    addToCart = (addToCart_data, callback, next) => {
-        console.log("Data is", addToCart_data);
+    addToCart = (cartData, callback) => {
+        console.log("Data is", cartData);
         cartModel.find({
             "$and": [
-                { userId: addToCart_data.userId },
-                { book_ID: addToCart_data.book_id }
+                { userId: cartData.userId },
+                { book_ID: cartData.book_id }
             ]
         }).then(data => {
             if (data.length !== 0) {
                 let prevQuantity = data[0].quantity + 1
                 let updatedCartData = {
-                    quantity: prevQuantity
+                    quantity: prevQuantity,
                 }
                 cartModel.findByIdAndUpdate({ _id: data[0]._id }, updatedCartData, { new: true }).then(data => {
                     callback({ message: 'Successfully added to the cart', success: true, data: data, status: 200 });
@@ -45,12 +46,13 @@ class CartModel {
             } else if (data.length == 0) {
 
                 let cartItemData = {
-                    userId: addToCart_data.userId,
-                    book_ID: addToCart_data.book_id,
+                    userId: cartData.userId,
+                    book_ID: cartData.book_id,
 
                 }
                 return cartModel.create(cartItemData)
                     .then(data => {
+                        console.log("cartItemData is", cartItemData);
                         callback({ message: 'Successfully added to the cart', success: true, data: data, status: 200 });
                     }).catch(err => {
                         callback({ message: 'Error failed to add to the cart', success: true, err: err, status: 400 });
@@ -58,8 +60,22 @@ class CartModel {
 
             }
         }).catch(err => {
-            next(err)
+            console.log(err);
         })
+    }
+
+    getAllItems(id) {
+        return cartModel.find(id)
+            .populate('book_ID')
+            .then(result => {
+                console.log("hi", result);
+                return result;
+            })
+            .catch(error => {
+                console.log("hi error");
+                return error;
+            })
+
     }
 
 
