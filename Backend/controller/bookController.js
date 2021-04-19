@@ -88,5 +88,23 @@ class bookController {
         }
     }
 
+    getbook = (req, res, next) => {
+        try {
+
+            bookService.getbook().then((result) => {
+                response.data = result.data;
+                response.flag = true;
+                response.message = result.message;
+                res.status(result.status).send(response);
+            }).catch((err) => {
+                response.flag = false;
+                response.data = err.message;
+                res.status(err.status).send(response);
+            });
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
 module.exports = new bookController()

@@ -64,6 +64,15 @@ class bookModel {
                 return error;
             })
     }
+    getbook() {
+        return booksModel.find()
+            .then(result => {
+                return (result)
+            }).catch(error => {
+                return (error)
+            })
+
+    }
 
 
 }

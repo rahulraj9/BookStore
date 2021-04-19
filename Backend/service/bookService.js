@@ -37,6 +37,15 @@ class BookService {
                 return ({ message: "Something Goes Wrong", error: error, status: statusCode.NotFound });
             })
     }
+    getbook() {
+        return bookModel.getbook()
+            .then((result) => {
+                return ({ message: "User All Notes Successfully", data: result, status: statusCode.OK });
+            })
+            .catch((error) => {
+                return ({ message: "Note Record is Not found", error: error, status: statusCode.NotFound });
+            })
+    }
 
 
 }
