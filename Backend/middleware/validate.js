@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator')
 let { InterServerError, UnprocessableEntity } = require('./httpStatusCode.json')
-const { errorLogger } = require("../middleware/logger")
+const { errorLogger } = require("./logger")
 
 
 let response = {}

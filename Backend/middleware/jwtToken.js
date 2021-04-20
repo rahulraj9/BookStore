@@ -1,6 +1,6 @@
 const { json } = require("body-parser");
 const jwt = require("jsonwebtoken");
-let { Forbidden, unauthorized } = require("../middleware/httpStatusCode.json");
+let { Forbidden, unauthorized } = require("./httpStatusCode.json");
 const { infoLogger } = require("./logger");
 let response = {}
 

@@ -13,6 +13,20 @@ class CustomerDetails {
                 return ({ success: false, message: "Failed to created customerAddress", status: statusCode.BadRequest });
             })
     }
+    getAddress(id) {
+        let userId = { userId: id }
+
+        console.log("we are inside", userId);
+        return customerAdressModel.getAddress(userId)
+            .then((result) => {
+
+                return ({ success: true, message: "customerAddress found Successfully", data: result, status: statusCode.OK });
+            })
+            .catch((error) => {
+
+                return ({ success: false, message: "Failed to found customerAddress", status: statusCode.BadRequest });
+            })
+    }
 }
 
 

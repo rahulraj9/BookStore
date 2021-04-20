@@ -84,6 +84,24 @@ class CartModel {
             })
     }
 
+    update_cart_item_Quantity_Model = (data, callback) => {
+
+        return cartModel.findByIdAndUpdate(data.updateCartItem_ID, data.data, { new: true }, (err, data) => {
+            if (err) {
+                callback({ 'message': "Error failed because book of given ID not found in the cart", 'success': false, status: 400 })
+            } else {
+
+                if (!data) {
+                    callback({ 'message': "Error failed because book of given ID not found in the cart", 'success': false, status: 400 })
+                } else if (data) {
+                    return callback({ 'message': "Cart item quantity updated successfully", 'success': true, data: data, status: 200 })
+                }
+            }
+
+
+        })
+    }
+
 
 
 }

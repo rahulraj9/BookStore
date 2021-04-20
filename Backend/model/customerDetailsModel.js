@@ -49,5 +49,15 @@ class CustomerDetails {
                 return error;
             });
     }
+    getAddress(id) {
+        return customerAddressModel.find(id)
+            .then(result => {
+                console.log("we are inside", id);
+                return result
+            }).catch(error => {
+                return error
+            })
+
+    }
 }
 module.exports = new CustomerDetails()

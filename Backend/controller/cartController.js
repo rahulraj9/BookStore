@@ -48,9 +48,9 @@ class CartController {
             let id = req.params.id;
             cartService.deleteItems(id)
                 .then((result) => {
-                    response.flag = true;
-                    response.data = result.data;
+                    response.success = true;
                     response.message = result.message;
+                    response.data = result.data;
                     res.status(result.status).send(response);
                 }).catch((err) => {
                     response.flag = false;
@@ -61,6 +61,33 @@ class CartController {
             next(error)
         }
     }
+    update_cart_item_Quantity_Controller = (req, res) => {
+
+        console.log("We are inside the controller's update_cart_item_Quantity_Controller function")
+
+        let data = {
+            updateCartItem_ID: req.params.id,
+            data: req.body
+        }
+
+        console.log('data : ', data)
+        let response = {};
+        cartService.update_cart_item_Quantity_Services(data, (data, err) => {
+            if (data) {
+                console.log('data in the controller : ', data)
+                response.success = data.success;
+                response.message = data.message;
+                response.data = data.data;
+                return res.status(data.status).send(response)
+            } else if (err) {
+                console.log('err in controller : ', err)
+                response.success = err.success;
+                response.message = err.message;
+                return res.status(400).send(response)
+            }
+        })
+    }
+
 }
 
 module.exports = new CartController();

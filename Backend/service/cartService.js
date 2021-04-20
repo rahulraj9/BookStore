@@ -40,6 +40,20 @@ class CartService {
     }
 
 
+    update_cart_item_Quantity_Services = (data, callback) => {
+
+        console.log("We are inside the service's update_cart_item_Quantity_Services function")
+        cartModel.update_cart_item_Quantity_Model(data, (data, err) => {
+            if (data) {
+                callback(data)
+            } else if (err) {
+                callback(err)
+            }
+        })
+    }
+
+
+
 
 }
 module.exports = new CartService()
