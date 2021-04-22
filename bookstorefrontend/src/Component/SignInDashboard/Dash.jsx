@@ -2,6 +2,7 @@ import React from "react";
 import './Dash.scss'
 import {Route, Switch} from 'react-router-dom'
 import SignIn from '../SignIn/SignIn'
+import Register from "../SignUp/SignUp"
 
 export default function Login(props) {
 
@@ -39,8 +40,11 @@ export default function Login(props) {
                 </button>
                 <br></br>
                     <Switch>
-                        <Route path="/bookstore/login">
+                        <Route path="/bookstore/login" >
                             <SignIn/>
+                        </Route>
+                        <Route path="/bookstore/signup" >
+                            <Register/>
                         </Route>
                     </Switch>
             </div>
