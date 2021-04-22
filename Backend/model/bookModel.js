@@ -22,16 +22,6 @@ const bookSchema = new Schema({
         type: Number,
         required: true
     },
-    isCart: {
-        type: Boolean,
-        required: true,
-        default: false
-    },
-    isWishlist: {
-        type: Boolean,
-        required: true,
-        default: false
-    }
 }, { timestamps: true })
 
 let booksModel = mongoose.model('bookDB', bookSchema)
@@ -72,6 +62,15 @@ class bookModel {
                 return (error)
             })
 
+    }
+    findOne(id) {
+        return booksModel.findOne({ _id: id })
+            .then((result) => {
+                return result;
+            })
+            .catch((error) => {
+                return error;
+            })
     }
 
 

@@ -1,48 +1,11 @@
 .container-login {
-    background: #868686 0% 0% no-repeat padding-box;
-    height: 100vh;
-    border: 1px solid black;
+    background: white;
+    // height: 337px;
     overflow: hidden;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.img-holder {
-    height: 400px;
-    border-radius: 21px;
-    background: #f5f5f5 0% 0% no-repeat padding-box;
-    position: relative;
-    opacity: 1;
-    display: flex;
-    margin: 40px;
-}
-
-.image {
-    content: url("../../Assets//mainLogo.png");
-    width: 245px;
-    height: 245px;
-    position: relative;
-    top: 70px;
-    right: -60px;
-    border-radius: 50%;
-}
-
-.login {
-    flex-direction: row;
-    position: relative;
-    width: 389px;
-    height: 550px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 0px 5px 15px #00000029;
-    border: 1px solid #e4e4e4;
-    border-radius: 6px;
-    opacity: 1;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    right: 150px;
+    justify-content: center;
+    // align-items: center;
 }
 
 .text {
@@ -66,20 +29,6 @@ button {
     outline: none;
 }
 
-.lgn {
-    position: relative;
-    right: 30px;
-}
-
-.sgn {
-    position: relative;
-    left: 26px;
-}
-
-.content {
-    display: none;
-}
-
 .active-content {
     display: flex;
     flex-direction: column;
@@ -99,7 +48,22 @@ button {
     font-size: 15px;
 }
 
-@media (max-width: 600px) {
+.flogin {
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.OR {
+    margin-top: 42px;
+}
+
+.flog {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+@media (max-width: 400px) {
     .img-holder {
         display: none;
     }
@@ -107,13 +71,16 @@ button {
         left: 0px;
     }
     .container-login {
-        border: 1px solid black;
+        background: white;
+        height: 337px;
         overflow: hidden;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: center;
-        height: auto;
-        background: #ffffff 0% 0% no-repeat padding-box;
+    }
+    .flogin {
+        //     margin-top: 10px;
+        //     justify-content: center;
+        display: none;
     }
 }

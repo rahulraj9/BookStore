@@ -49,4 +49,4 @@ class OrderBookModel {
             })
     }
 }
-module.exports = new OrderBookModel();
+module.exports = new OrderBookModel()

@@ -1,9 +1,10 @@
-// const orderDetailsModel = require('../model/orderModel')
+const orderDetailsModel = require('../model/orderModel')
 const orderBookModel = require('../model/orderModel')
 const statusCode = require('../middleware/httpStatusCode.json')
 
 class OrderBookService {
     placeOrder(data, id) {
+        console.log(data)
         data.userID = id;
         const orderid = require('order-id')('mysecret');
         const ID = orderid.generate();

@@ -1,11 +1,19 @@
-
 import './App.css';
-import Login from './Component/SignIn/SignIn'
+import Dash from './Component/SignInDashboard/Dash'
+
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
-      <Login />
+   
+       <BrowserRouter>
+
+        <Switch>
+          <Redirect path="/" to="/bookstore" exact />
+          <Route path="/bookstore" component={Dash}/>
+          </Switch>
+          </BrowserRouter>
     </div>
   );
 }
