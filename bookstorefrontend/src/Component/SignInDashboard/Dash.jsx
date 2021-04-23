@@ -1,6 +1,6 @@
 import React from "react";
 import './Dash.scss'
-import {Route, Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import SignIn from '../SignIn/SignIn'
 import Register from "../SignUp/SignUp"
 
@@ -14,6 +14,7 @@ export default function Login(props) {
     };
 
     const loginSelect = () => {
+      
         setlogin(true)
         setSignup(false)
         nextPath("/bookstore/login");
@@ -39,14 +40,14 @@ export default function Login(props) {
                     SIGN UP
                 </button>
                 <br></br>
-                    <Switch>
-                        <Route path="/bookstore/login" >
-                            <SignIn/>
-                        </Route>
-                        <Route path="/bookstore/signup" >
-                            <Register/>
-                        </Route>
-                    </Switch>
+                <Switch>
+                    <Route path="/bookstore/login" >
+                        <SignIn />
+                    </Route>
+                    <Route path="/bookstore/signup" >
+                        <Register />
+                    </Route>
+                </Switch>
             </div>
         </div>
     );

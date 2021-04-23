@@ -75,7 +75,7 @@ class UserModel {
                         let userData = {
                             "_id": data[0]._id,
                             "role": data[0].role,
-                            "fullName": data[0].firstName,
+                            "fullName": data[0].fullName,
                             "email": data[0].email,
                             "mobile": data[0].mobile,
                             "token": token

@@ -3,8 +3,11 @@ import Button from "react-bootstrap/Button";
 import Button1 from '@material-ui/core/Button';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from '@material-ui/core/styles';
-import './signIn.scss'
+import services from "../../Services/userServices"
 
+import './signIn.scss'
+import { useHistory } from "react-router";
+const service = new services()
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -25,6 +28,8 @@ export default function Login(props) {
     const [passwordFlag, setpasswordFlag] = React.useState(false);
     const [passwordError, setpasswordError] = React.useState("");
 
+ 
+    let history = useHistory();
     const makeInitial = () => {
         setemailFlag(false);
         setemailError("");
@@ -55,11 +60,22 @@ export default function Login(props) {
         if (pattern1Check()) {
             console.log("Error Occured");
         } else {
-            console.log("Success");
+           
             const data = {
                 email: email,
                 password: password,
             };
+            service.login(data).then((response)=>{
+                console.log(response)
+                localStorage.setItem("Usertoken", response.data.data.token)
+                localStorage.setItem("Useremail", response.data.data.email)
+                localStorage.setItem("UserName", response.data.data.fullName)
+                console.log("Success",response.data.data.fullName);
+                setTimeout(() => {  history.push("/dashBoard"); }, 2000);
+            })
+            .catch((error)=>{
+                console.log("error")
+            })
         }
     };
 
@@ -109,13 +125,11 @@ export default function Login(props) {
                         Login
                   </Button>
                 </div>
-
-
             </div>
             <br />
             <div className="flogin">
                 <div className="OR">
-                    <p>--------------------OR--------------------</p>
+                    <p>---------    OR    ---------</p>
                     <div className="flog">
                         <Button1 variant="contained" color="primary">
                             FaceBook

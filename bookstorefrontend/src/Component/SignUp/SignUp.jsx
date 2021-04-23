@@ -1,10 +1,11 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import TextField from "@material-ui/core/TextField";
-
 import { makeStyles } from '@material-ui/core/styles';
-
+import services from "../../Services/userServices"
 import './SignUp.scss'
+import { useHistory } from "react-router";
+const service = new services()
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -41,6 +42,9 @@ export default function SignUp(props) {
         setPasswordError("");
     };
 
+  
+    let history = useHistory();
+  
     const patternCheck = () => {
         makeInitial();
         const namePattern = /[a-zA-Z][a-zA-Z ]*/;
@@ -77,12 +81,18 @@ export default function SignUp(props) {
         } else {
             console.log("Success");
             const data = {
-                fullname: name,
+                fullName: name,
                 email: email,
                 password: password,
                 mobile: mobile,
             };
             console.log(data);
+            service.Registration(data).then((response)=>{
+                console.log("sucess")
+                setTimeout(() => {  history.push("/bookstore/login"); }, 2000);
+            }).catch((error)=>{
+                console.log("error") 
+            })
         }
     };
     return (
