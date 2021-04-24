@@ -1,7 +1,7 @@
 import './App.css';
 import Dash from './Component/SignInDashboard/Dash'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Header from './Component/Header/Header'
+import Dashboard from './Component/DashBoard/DashBoard'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Switch>
           <Redirect path="/" to="/bookstore/login" exact />
           <Route path="/bookstore" component={Dash}/>
-          <Route path="/dashBoard" component={Header}/>
+          <Route path="/dashBoard" component={Dashboard}/>
           
           </Switch>
           </BrowserRouter>

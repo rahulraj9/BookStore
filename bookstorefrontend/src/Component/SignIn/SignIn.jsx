@@ -40,7 +40,7 @@ export default function Login(props) {
     const pattern1Check = () => {
         makeInitial();
         const emailPattern = /[a-zA-Z0-9._]+[@]{1}[a-zA-Z120-9]*[.]{1}[a-zA-Z]*$/;
-        const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$/;
+        // const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$/;
         let isError = false;
 
         if (!emailPattern.test(email)) {
@@ -48,11 +48,11 @@ export default function Login(props) {
             setemailError("Email is Not Proper");
             isError = true;
         }
-        if (!passwordPattern.test(password)) {
-            setpasswordFlag(true);
-            setpasswordError("Please Enter Valid Password");
-            isError = true;
-        }
+        // if (!passwordPattern.test(password)) {
+        //     setpasswordFlag(true);
+        //     setpasswordError("Please Enter Valid Password");
+        //     isError = true;
+        // }
         return isError;
     };
 

@@ -22,6 +22,10 @@ const bookSchema = new Schema({
         type: Number,
         required: true
     },
+    bookImgUrl: {
+        type: String,
+        required: true
+    }
 }, { timestamps: true })
 
 let booksModel = mongoose.model('bookDB', bookSchema)

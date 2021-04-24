@@ -12,7 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import { withStyles } from "@material-ui/core/styles";
 import Badge from "@material-ui/core/Badge";
-import './Header.scss'
+import './Appbar.scss'
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
@@ -127,8 +127,7 @@ export default function Header(props) {
     const [books, setBooks] = React.useState([]);
     const [data, setData] = React.useState(0);
     const [hide, setHide] = React.useState(false);
-
-
+    
     const open = Boolean(anchorEl);
     let history = useHistory();
     const searchItemfunc = (e, data) => {
@@ -196,6 +195,7 @@ export default function Header(props) {
                                 onClick={handleClick}>
                             </PermIdentityIcon>
                             <Menu
+                            
                                 id="fade-menu"
                                 anchorEl={anchorEl}
                                 keepMounted
@@ -204,6 +204,7 @@ export default function Header(props) {
                                 TransitionComponent={Fade}
                             >
 
+                            
                                 <MenuItem>
                                     <div className="avatarContainer">
                                         <Avatar className="avatarIcon" alt='profile' />

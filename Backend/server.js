@@ -6,9 +6,12 @@ var bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 dotenv.config();
 
+var cors = require('cors')
+
 const port = process.env.port
 
 app.use(bodyParser.json())
+app.use(cors())
 
 
 const route = require('./routes/routes')
