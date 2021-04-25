@@ -30,6 +30,7 @@ class CartController {
             let id = req.decoded._id;
             cartService.getAllItems(id)
                 .then((result) => {
+                    console.log(result.data)
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;

@@ -121,10 +121,17 @@ export default function DisplayNotes(props) {
     };
 
     const addedToCart = (e, data) => {
-        e.stopPropagation();
+        // e.stopPropagation();
         const id = data._id;
-        data.isCart = true;
+        console.log("id is",id)
+        service.addToCart(id).then((response)=>{
 
+            props.allCartItem();
+            console.log("Added Sucessfully in Cart")
+        }).catch((error)=>{
+            console.log(error);
+            console.log("Some Error Occured");
+        })
     };
 
     const paginate = (pageNumber) => {
@@ -164,7 +171,11 @@ export default function DisplayNotes(props) {
             <div className="allBooks">
                 {currentBooks.map((data) => (
                     <div className="bookContainer">
-
+                           {props.cartBooks.map((cart) => {
+                            if (cart._id === data._id) {
+                                data.isCart = true;
+                            }
+                        })}
                         <div className="imageContainer">
                             <img className="bookImage" src={data.bookImgUrl} alt="" />
                         </div>

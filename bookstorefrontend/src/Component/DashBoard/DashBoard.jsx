@@ -4,6 +4,12 @@ import AppBar from "../AppBar/AppBar";
 import Books from "../DisplayBook/DisplayBook";
 import { Switch, Route } from "react-router-dom";
 import Footer from '../Footer/footer'
+import Cart from "../Cart/Cart"
+import ProtectedRoutes from "../protectedRoutes/protectedRoutes"
+import PlacedOrder from '../OrderPlaced/orderPlaced'
+import services from '../../Services/bookService'
+
+const service = new services()
 
 
 
@@ -21,16 +27,61 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard(props) {
     const classes = useStyles();
+    const [show, setShow] = React.useState(false);
+    const [cartBooks, setCartBooks] = React.useState([]);
+    const [orderPlaced, setOrderPlaced] = React.useState([]);
+
+    const nextPath = (e, path) => {
+        e.stopPropagation();
+        props.history.push(path);
+    };
+
+    React.useEffect(() => {
+        allCartItem();
+    }, []);
+
+    const allCartItem = () => {
+
+        service.getCartBook().then((data) => {
+            console.log("Sucessfull", data)
+            const dataArray = data.data.data
+            const dataShow = []
+            dataArray.map((data) => {
+                if (data._id !== null) {
+                    dataShow.push(data);
+                }
+            })
+            console.log('getcart : ', dataArray);
+            console.log('dataShow : ', dataShow)
+            setCartBooks(dataShow);
+        }).catch((error) => {
+            console.log("error", error)
+        })
+    };
     return (
         <div className={classes.dashboardMain}>
-            <AppBar />
+            <AppBar
+                totalCartItem={cartBooks.length}
+                nextPath={nextPath}
+                setShow={setShow} />
             <Switch>
                 <Route path="/dashboard" exact>
-                    <Books />
+                    <Books cartBooks={cartBooks} allCartItem={allCartItem} />
                 </Route>
+                <ProtectedRoutes path="/dashboard/cart" exact>
+                    <Cart
+                        cartBooks={cartBooks}
+                        allCartItem={allCartItem}
+                        nextPath={nextPath}
+                        setOrderPlaced={setOrderPlaced}
+                    />
+                </ProtectedRoutes>
+                <ProtectedRoutes path="/dashboard/orderPlaced" exact>
+                    <PlacedOrder orderPlaced={orderPlaced} nextPath={nextPath} />
+                </ProtectedRoutes>
             </Switch>
-            <Footer/>
-          
+            <Footer />
+
         </div>
     );
 

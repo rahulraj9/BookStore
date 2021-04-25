@@ -23,6 +23,7 @@ let cartModel = mongoose.model('cart_Items', cartSchema)
 
 
 
+
 class CartModel {
 
     addToCart = (cartData, callback) => {
@@ -63,6 +64,7 @@ class CartModel {
     }
 
     getAllItems(id) {
+        console.log(id)
         return cartModel.find(id)
             .populate('book_ID')
             .then(result => {

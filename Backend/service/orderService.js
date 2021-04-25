@@ -5,10 +5,10 @@ const statusCode = require('../middleware/httpStatusCode.json')
 class OrderBookService {
     placeOrder(data, id) {
         console.log(data)
-        data.userID = id;
-        const orderid = require('order-id')('mysecret');
-        const ID = orderid.generate();
-        data.orderID = ID;
+            // data.userID = id;
+            // const orderid = require('order-id')('mysecret');
+            // const ID = orderid.generate();
+            // data.orderID = ID;
 
 
         return orderBookModel.placeOrder(data)

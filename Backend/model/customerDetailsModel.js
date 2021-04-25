@@ -14,7 +14,7 @@ const customerAddressSchema = new Schema({
         type: Number,
         required: true
     },
-    addresstype: {
+    address: {
         type: String,
         required: true
     },
@@ -34,6 +34,10 @@ const customerAddressSchema = new Schema({
         type: Number,
         required: true
     },
+    addresstype: {
+        type: String,
+        required: true
+    }
 })
 
 const customerAddressModel = mongoose.model('customerDetails', customerAddressSchema)

@@ -235,8 +235,8 @@ export default function Header(props) {
                         </IconButton>
                         <IconButton
                             className={classes.cartButton}
-                        >
-                            <StyledBadge>
+                            onClick={(e) => history.push("/dashBoard/cart")}>
+                            <StyledBadge badgeContent={props.totalCartItem} className={classes.badge}>
                                 <ShoppingCartOutlinedIcon />
                             </StyledBadge>
                             <span>Cart</span>
