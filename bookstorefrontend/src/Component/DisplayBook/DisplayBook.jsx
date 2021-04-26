@@ -1,7 +1,6 @@
 import React from "react";
 import "./DisplayBook.scss";
 import { makeStyles } from "@material-ui/core/styles";
-import bookImg from "../../Assets/Image11.png";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
@@ -76,7 +75,7 @@ export default function DisplayNotes(props) {
     const [books, setBooks] = React.useState([]);
     const [data, setData] = React.useState(0);
     const [sort, setSort] = React.useState({ type: "" });
-    const [postsPerPage] = React.useState(10);
+    const [postsPerPage] = React.useState(8);
     const [currentPage, setCurrentPage] = React.useState(1);
 
 
@@ -108,12 +107,10 @@ export default function DisplayNotes(props) {
                 setBooks(data);
                 break;
             case "1":
-                console.log(1)
                 setBooks(books.sort((a, b) => (a.price > b.price ? -1 : 1)));
                 setBooks(data);
                 break;
             case "2":
-                console.log(2)
                 setBooks(books.sort((a, b) => (a.price > b.price ? 1 : -1)));
                 setBooks(data);
                 break;
@@ -121,11 +118,10 @@ export default function DisplayNotes(props) {
     };
 
     const addedToCart = (e, data) => {
-        // e.stopPropagation();
         const id = data._id;
         console.log("id is",id)
+         data.isCart = true;
         service.addToCart(id).then((response)=>{
-
             props.allCartItem();
             console.log("Added Sucessfully in Cart")
         }).catch((error)=>{
@@ -171,11 +167,7 @@ export default function DisplayNotes(props) {
             <div className="allBooks">
                 {currentBooks.map((data) => (
                     <div className="bookContainer">
-                           {props.cartBooks.map((cart) => {
-                            if (cart._id === data._id) {
-                                data.isCart = true;
-                            }
-                        })}
+                        
                         <div className="imageContainer">
                             <img className="bookImage" src={data.bookImgUrl} alt="" />
                         </div>

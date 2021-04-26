@@ -1,52 +1,70 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema
-var orderSchema = new mongoose.Schema({
+
+const userSchema = new Schema({
     userID: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         require: true
     },
-    book_ID: [{
+    book_ID: {
         type: Schema.Types.ObjectId,
         ref: 'bookDB',
         require: true
-    }],
-    customerDetails: {
-        type: Schema.Types.ObjectId,
-        ref: 'customerDetails',
-        require: true
     },
-    orderID: {
+    order_ID: {
         type: String,
-        require: true
-    }
-}, {
-    timestamps: true
-});
+        required: true,
+        unique: true
+    },
+    quantity: {
+        type: Number,
+        required: true
+    },
 
-var orderModel = mongoose.model('orderPlaced', orderSchema);
+}, { timestamps: true })
 
-class OrderBookModel {
-    placeOrder(data) {
-        return orderModel.create(data)
-            .then((result) => {
-                return result;
-            }).catch((error) => {
-                return error;
-            });
-    }
-    getOrderDetails(id) {
-        return orderModel.findOne({ userID: id })
-            .populate('userID')
-            .populate('book_ID')
-            .populate('customerDetails')
-            .then((result) => {
-                return result;
-            })
-            .catch((error) => {
-                return error;
-            })
+let orderDetailsModel = mongoose.model('order_details', userSchema)
+    // module.exports = orderDetailsModel
+
+class orderModel {
+
+
+
+    add_Order_details_Model = (orderDetailsData, callback) => {
+
+        console.log("We are inside the Model's add_Order_details_Model function")
+        console.log('orderDetailsData : ', orderDetailsData)
+        orderDetailsModel.create(orderDetailsData, (err, data) => {
+            if (err) {
+                console.log('err : ', err)
+                console.log('Error failed to store the order details')
+
+            } else if (data) {
+                console.log('data : ', data)
+                console.log('Successfully stored order details')
+
+            }
+        })
+
+
+
+
+        orderDetailsModel.populate(orderDetailsData, { path: "book_ID" }, function(err, result) {
+            if (err) {
+                console.log('err : ', err)
+                console.log('Error failed to store the order details')
+                callback(err)
+            } else if (result) {
+                console.log('result : ', result)
+                console.log('Successfully stored order details')
+                callback(result)
+            }
+        })
+
+
     }
 }
-module.exports = new OrderBookModel()
+
+module.exports = new orderModel();

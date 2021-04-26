@@ -14,7 +14,6 @@ import "./Cart.scss";
 import services from "../../Services/bookService"
 
 const service = new services()
-// import { deleteCartItem, addOrder, addCustomersDetails, addQuantity } from '../../Services/bookServices'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -92,8 +91,6 @@ export default function Cart(props) {
   const [stateFlag, setStateFlag] = React.useState(false);
   const [stateError, setStateError] = React.useState("");
   const [count, setCount] = React.useState(1);
-  const [countdec, setCountdec] = React.useState(1);
-
 
   const makeInitial = () => {
     setNameFlag(false);
@@ -207,7 +204,7 @@ export default function Cart(props) {
     console.log("quantity", count)
 
     let quantityToBuy = {
-      "quantity": count+1
+      "quantity": count
     }
     console.log("quantityToBuy",quantityToBuy)
     service.updateCartBook(quantityToBuy, data._id).then((data) => {
@@ -219,7 +216,7 @@ export default function Cart(props) {
 
 
   const handleIncrement = (data) => {
-    console.log('data in handleIncrement : ', data.quantity)
+    console.log('data in handleIncrement : ', data)
     setCount(count =>count + 1);
     AddCartQuantity(data)
 
@@ -228,6 +225,7 @@ export default function Cart(props) {
 
   const handleDecrement = (data) => {
     console.log('data in handleDecrement: ', data)
+    console.log("cartbiiilllll",props.cartBooks)
     setCount(count => count - 1);
     AddCartQuantity(data)
   };
@@ -278,6 +276,7 @@ export default function Cart(props) {
               <Typography className={classes.bookAuthor}>
                 {data.book_ID.author}
               </Typography>
+             
               <Typography className={classes.bookPrize}>
                 Rs. {data.book_ID.price * data.quantity}
               </Typography>
@@ -301,7 +300,6 @@ export default function Cart(props) {
       addresstype: value
     }
 
-    console.log('customersData : ', customersData)
   service.customerDetails(customersData).then((data)=>{
       console.log('data from add customer details backend : ', data)
     }).catch((error)=>{
@@ -318,17 +316,15 @@ export default function Cart(props) {
         quantity: data.quantity,
         order_ID: order_ID
       };
-      console.log('same : ', same)
+      console.log('same : ', same.book_ID)
       order.push(same);
     });
- 
-    let Order = order;
-    // let orderData = {
-    //   orders: order,
-    // };
-    console.log('orderData : ', Order);
-    service.placeOrder(Order).then((data)=>{
-      console.log("Successfully order Placed" + JSON.stringify(data));
+    let orderData = {
+      orders: order,
+    };
+    console.log('orderData : ', orderData);
+    service.placeOrder(orderData).then((data)=>{
+      console.log("Successfully order Placed",data);
       props.setOrderPlaced(data);
       props.nextPath(e, "../dashboard/orderPlaced");
     }).catch((error)=>{

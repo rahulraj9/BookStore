@@ -22,6 +22,11 @@ const bookSchema = new Schema({
         type: Number,
         required: true
     },
+    isCart: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     bookImgUrl: {
         type: String,
         required: true

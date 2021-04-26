@@ -148,10 +148,6 @@ export default function Header(props) {
         setAnchorEl(null);
     };
 
-    const handleProfile = () => {
-        setHide(!hide)
-    }
-
     return (
         <React.Fragment>
             <CssBaseline />
@@ -194,6 +190,7 @@ export default function Header(props) {
                                 aria-haspopup="true"
                                 onClick={handleClick}>
                             </PermIdentityIcon>
+                            
                             <Menu
                             
                                 id="fade-menu"

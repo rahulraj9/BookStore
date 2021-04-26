@@ -30,6 +30,7 @@ export default function Dashboard(props) {
     const [show, setShow] = React.useState(false);
     const [cartBooks, setCartBooks] = React.useState([]);
     const [orderPlaced, setOrderPlaced] = React.useState([]);
+    // const[quantity,setQuantity ]=React.useState();
 
     const nextPath = (e, path) => {
         e.stopPropagation();
@@ -43,9 +44,10 @@ export default function Dashboard(props) {
     const allCartItem = () => {
 
         service.getCartBook().then((data) => {
-            console.log("Sucessfull", data)
+            
             const dataArray = data.data.data
             const dataShow = []
+            console.log("Sucessfull loaded cart book", dataArray)
             dataArray.map((data) => {
                 if (data._id !== null) {
                     dataShow.push(data);
@@ -64,10 +66,10 @@ export default function Dashboard(props) {
                 totalCartItem={cartBooks.length}
                 nextPath={nextPath}
                 setShow={setShow} />
-            <Switch>
-                <Route path="/dashboard" exact>
+          
+                <Route path="/dashboard" exact> 
                     <Books cartBooks={cartBooks} allCartItem={allCartItem} />
-                </Route>
+                 </Route>
                 <ProtectedRoutes path="/dashboard/cart" exact>
                     <Cart
                         cartBooks={cartBooks}
@@ -79,7 +81,7 @@ export default function Dashboard(props) {
                 <ProtectedRoutes path="/dashboard/orderPlaced" exact>
                     <PlacedOrder orderPlaced={orderPlaced} nextPath={nextPath} />
                 </ProtectedRoutes>
-            </Switch>
+          
             <Footer />
 
         </div>

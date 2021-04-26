@@ -1,32 +1,23 @@
 const orderDetailsModel = require('../model/orderModel')
-const orderBookModel = require('../model/orderModel')
-const statusCode = require('../middleware/httpStatusCode.json')
 
-class OrderBookService {
-    placeOrder(data, id) {
-        console.log(data)
-            // data.userID = id;
-            // const orderid = require('order-id')('mysecret');
-            // const ID = orderid.generate();
-            // data.orderID = ID;
+class order_Details {
 
+    add_Order_details_Services = (orderDetailsData, callback) => {
 
-        return orderBookModel.placeOrder(data)
-            .then((result) => {
-                return ({ success: true, message: "Order Placed Successfully", data: result, status: statusCode.OK });
-            })
-            .catch((error) => {
-                return ({ success: false, message: "Failed to Placed Order", status: statusCode.BadRequest });
-            })
+        console.log("We are inside the service's add_Order_details_Services function")
+        orderDetailsModel.add_Order_details_Model(orderDetailsData, (data, err) => {
+            if (data) {
+                console.log('data in the services : ', data)
+                callback({ message: 'Order details added successfully', success: true, status: 200, data: data })
+            } else if (err) {
+                callback({ message: 'Error failed to add order details', success: false, status: 400, err: err })
+            }
+        })
     }
-    getOrderDetails(id) {
-        return orderBookModel.getOrderDetails(id)
-            .then((result) => {
-                return ({ success: true, message: "Order Details Successfully", data: result, status: statusCode.OK });
-            }).catch((err) => {
-                return ({ success: false, message: "Failed to get details Order", status: statusCode.BadRequest });
-            });
 
-    }
+
+
+
 }
-module.exports = new OrderBookService();
+
+module.exports = new order_Details();

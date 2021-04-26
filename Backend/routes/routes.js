@@ -44,8 +44,8 @@ route.get('/CustomerDetails/', jwtToken.tokenVerify, customerDetails.getAddress)
  * order
  */
 
-route.post('/add/order_details', jwtToken.tokenVerify, orderDetailsController.placeOrder)
+route.post('/add/order_details', jwtToken.tokenVerify, orderDetailsController.add_Order_details_controller)
 
-route.get('/add/order_details', jwtToken.tokenVerify, orderDetailsController.getOrderDetails)
+// route.get('/add/order_details', jwtToken.tokenVerify, orderDetailsController.getOrderDetails)
 
 module.exports = route
