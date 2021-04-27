@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
         color: "black",
         borderRadius: "2px",
         fontSize: "13px",
+        marginTop: "-315px"
     },
     wishListButton: {
         padding: "3px 4px 3px 4px",
@@ -63,6 +64,17 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "13px",
         borderRadius: "2px",
         fontWeight: "bold",
+    },
+    outwishListButton: {
+        width: "172px",
+        height: "34px",
+        marginTop: "-14px",
+        padding: "3px 4px 3px 4px",
+        fontSize:"13px",
+        fontWeight:"bold",
+        borderRadius: "2px",
+        backgroundColor: "white",
+        border :"1px solid black"
     },
 
     optionSelect: {
@@ -119,12 +131,12 @@ export default function DisplayNotes(props) {
 
     const addedToCart = (e, data) => {
         const id = data._id;
-        console.log("id is",id)
-         data.isCart = true;
-        service.addToCart(id).then((response)=>{
+        console.log("id is", id)
+        data.isCart = true;
+        service.addToCart(id).then((response) => {
             props.allCartItem();
             console.log("Added Sucessfully in Cart")
-        }).catch((error)=>{
+        }).catch((error) => {
             console.log(error);
             console.log("Some Error Occured");
         })
@@ -167,7 +179,7 @@ export default function DisplayNotes(props) {
             <div className="allBooks">
                 {currentBooks.map((data) => (
                     <div className="bookContainer">
-                        
+
                         <div className="imageContainer">
                             <img className="bookImage" src={data.bookImgUrl} alt="" />
                         </div>
@@ -191,40 +203,46 @@ export default function DisplayNotes(props) {
                                 Added To Wishlist
                             </Button>
                         ) : data.quantity == 0 ? (
+                            <div>
                             <Button variant="contained" className={classes.ouOfStockButton}>
                                 Out of Stock
                             </Button>
-                        ) : (
-                            <div className="buttonContainer">
-                                <Button
-                                    variant="contained"
-                                    onClick={(e) => addedToCart(e, data)}
-                                    className={classes.addToBagButton}
-                                >
-                                    Add to cart
-                                </Button>
-                                <Button variant="outlined"
-                                    className={classes.wishListButton}
-
-                                >
-                                    WishList
-                                </Button>
+                            <Button variant="contained" className={classes.outwishListButton}>
+                            WishList
+                            </Button>
                             </div>
+                            )
+                           : (
+                            <div className="buttonContainer">
+                    <Button
+                        variant="contained"
+                        onClick={(e) => addedToCart(e, data)}
+                        className={classes.addToBagButton}
+                    >
+                        Add to cart
+                                </Button>
+                    <Button variant="outlined"
+                        className={classes.wishListButton}
+
+                    >
+                        WishList
+                                </Button>
+                </div>
 
                         )}
                         <div className="descClass">
-                            <Typography className={classes.bookName}>Book Details</Typography>
-                            <Typography className={classes.bookName}>{data.bookname}</Typography>
-                            {data.description}
-                        </div>
-                    </div>
-                ))}
-                <Pagination
-                    postsPerPage={postsPerPage}
-                    totalPosts={books.length}
-                    paginate={paginate}
-                ></Pagination>
+                    <Typography className={classes.bookName}>Book Details</Typography>
+                    <Typography className={classes.bookName}>{data.bookname}</Typography>
+                    {data.description}
+                </div>
             </div>
+                ))}
+            <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={books.length}
+                paginate={paginate}
+            ></Pagination>
         </div>
+        </div >
     );
 }

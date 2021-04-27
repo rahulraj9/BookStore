@@ -225,7 +225,6 @@ export default function Cart(props) {
 
   const handleDecrement = (data) => {
     console.log('data in handleDecrement: ', data)
-    console.log("cartbiiilllll",props.cartBooks)
     setCount(count => count - 1);
     AddCartQuantity(data)
   };

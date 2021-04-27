@@ -26,8 +26,6 @@ const userSchema = new Schema({
 }, { timestamps: true })
 
 let orderDetailsModel = mongoose.model('order_details', userSchema)
-    // module.exports = orderDetailsModel
-
 class orderModel {
 
 
@@ -47,9 +45,6 @@ class orderModel {
 
             }
         })
-
-
-
 
         orderDetailsModel.populate(orderDetailsData, { path: "book_ID" }, function(err, result) {
             if (err) {

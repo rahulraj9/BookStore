@@ -7,7 +7,7 @@ import Dashboard from './Component/DashBoard/DashBoard'
 function App() {
   return (
     <div className="App">
-     {/* <Cart></Cart> */}
+  
       <BrowserRouter>
         <Switch>
           <Redirect path="/" to="/bookstore/login" exact />

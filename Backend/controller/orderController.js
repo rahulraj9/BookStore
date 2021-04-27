@@ -2,9 +2,7 @@ const orderDetailsServices = require('../service/orderService')
 
 
 const add_Order_details_controller = (req, res) => {
-    console.log('req.decoded : ', req.decoded)
-    console.log('req.body : ', req.body)
-    console.log('req.body.orders : ', req.body.orders)
+
 
     let orderDetailsData = {
         userID: req.decoded._id,
