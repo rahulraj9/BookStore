@@ -146,10 +146,11 @@ export default function DisplayNotes(props) {
         setCurrentPage(pageNumber);
     };
 
+  
     const indexOfLastBook = currentPage * postsPerPage;
     const indexOfFirstBook = indexOfLastBook - postsPerPage;
     const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
-
+  
 
     return (
         <div className="displayBook">

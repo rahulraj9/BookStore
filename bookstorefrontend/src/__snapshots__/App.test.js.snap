@@ -1,0 +1,192 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="img-holder"
+      >
+        <img
+          alt="image"
+          class="image"
+        />
+        <span
+          class="text"
+        >
+          ONLINE BOOK SHOPPING
+        </span>
+      </div>
+      <div
+        class="login"
+      >
+        <br />
+        <button
+          class="lgn"
+          text="Test"
+        >
+          LOGIN
+        </button>
+        <button
+          class="sgn"
+          text="Test"
+        >
+          SIGN UP
+        </button>
+        <br />
+        <div
+          class="container-login"
+        >
+          <div
+            class="active-content"
+          />
+          <br />
+          <div>
+            <div>
+              <br />
+              <br />
+              <div
+                class="makeStyles-root-6"
+              >
+                <div
+                  class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+                >
+                  <label
+                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
+                    data-shrink="false"
+                    for="outlined-email-input"
+                    id="outlined-email-input-label"
+                  >
+                    Email
+                  </label>
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                  >
+                    <input
+                      aria-invalid="false"
+                      class="MuiInputBase-input MuiOutlinedInput-input"
+                      id="outlined-email-input"
+                      name="email"
+                      type="text"
+                      value=""
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="PrivateNotchedOutline-root-7 MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="PrivateNotchedOutline-legendLabelled-9"
+                      >
+                        <span>
+                          Email
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div
+                class="makeStyles-root-6"
+              >
+                <div
+                  class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+                >
+                  <label
+                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
+                    data-shrink="false"
+                    for="outlined-pass-input"
+                    id="outlined-pass-input-label"
+                  >
+                    Password
+                  </label>
+                  <div
+                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                  >
+                    <input
+                      aria-invalid="false"
+                      class="MuiInputBase-input MuiOutlinedInput-input"
+                      id="outlined-pass-input"
+                      name="password"
+                      type="password"
+                      value=""
+                    />
+                    <fieldset
+                      aria-hidden="true"
+                      class="PrivateNotchedOutline-root-7 MuiOutlinedInput-notchedOutline"
+                    >
+                      <legend
+                        class="PrivateNotchedOutline-legendLabelled-9"
+                      >
+                        <span>
+                          Password
+                        </span>
+                      </legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <button
+                class="btn btn btn-primary"
+                text="test"
+                type="button"
+              >
+                Login
+              </button>
+            </div>
+          </div>
+          <br />
+          <div
+            class="flogin"
+          >
+            <div
+              class="OR"
+            >
+              <p>
+                ---------    OR    ---------
+              </p>
+              <div
+                class="flog"
+              >
+                <button
+                  class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiButton-label"
+                  >
+                    FaceBook
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+                <button
+                  class="MuiButtonBase-root MuiButton-root MuiButton-contained"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiButton-label"
+                  >
+                    Google
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
