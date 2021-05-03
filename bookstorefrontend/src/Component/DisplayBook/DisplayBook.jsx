@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight:"bold",
         borderRadius: "2px",
         backgroundColor: "white",
-        border :"1px solid black"
+        border :"1px solid gray"
     },
 
     optionSelect: {
@@ -204,14 +204,14 @@ export default function DisplayNotes(props) {
                                 Added To Wishlist
                             </Button>
                         ) : data.quantity == 0 ? (
-                            <div>
+                            <>
                             <Button variant="contained" className={classes.ouOfStockButton}>
                                 Out of Stock
                             </Button>
                             <Button variant="contained" className={classes.outwishListButton}>
                             WishList
                             </Button>
-                            </div>
+                            </>
                             )
                            : (
                             <div className="buttonContainer">

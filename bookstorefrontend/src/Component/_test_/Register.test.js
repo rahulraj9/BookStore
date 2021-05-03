@@ -7,6 +7,12 @@ describe('Registartion Component', () => {
     it('should render without throwing an error', () => {
         expect(shallow( < Register / > ).exists()).toBe(true)
     })
+    it('renders a email input', () => {
+            expect(shallow( < Register / > ).find('#outlined-secondary-email').length).toEqual(1)
+        }),
+        it('renders a password input', () => {
+            expect(shallow( < Register / > ).find('#outlined-secondary-password').length).toEqual(1)
+        })
 })
 
 

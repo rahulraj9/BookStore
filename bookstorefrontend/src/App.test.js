@@ -11,12 +11,12 @@ afterEach(cleanup)
 // });
 
 it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render( < App / > , div);
-    ReactDOM.unmountComponentAtNode(div);
-});
-it('should take a snapshot', () => {
-    const { asFragment } = render( < App / > )
+        const div = document.createElement('div');
+        ReactDOM.render( < App / > , div);
+        ReactDOM.unmountComponentAtNode(div);
+    }),
+    it('should take a snapshot', () => {
+        const { asFragment } = render( < App / > )
 
-    expect(asFragment( < App / > )).toMatchSnapshot()
-})
+        expect(asFragment( < App / > )).toMatchSnapshot()
+    })
