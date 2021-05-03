@@ -19,9 +19,25 @@ describe('Login Component', () => {
 })
 
 describe("Button Component Tests", () => {
-    it("Renders correctly in DOM", () => {
-        shallow( <
-            button text = "Test" / >
-        );
-    })
+    it('should be defined', () => {
+            const wrapper = shallow( < button text = "test" / > )
+            expect(wrapper.find('button')).toBeDefined();
+        }),
+        it("Renders correctly in DOM", () => {
+            shallow( <
+                button text = "Test" / >
+            );
+        })
+    it("Expects to find button HTML element in the DOM", () => {
+        const wrapper = shallow( < button text = "test" / > )
+        expect(wrapper.find('button')).toHaveLength(1);
+    });
+    it("Expects to run onClick function when button is pressed in the DOM", () => {
+        const mockFn = jest.fn();
+        const wrapper = shallow( < button onClick = { mockFn }
+            className = "btn"
+            text = "test" / > );
+        wrapper.find('button').simulate('click');
+        expect(mockFn.mock.calls.length).toEqual(1);
+    });
 })
