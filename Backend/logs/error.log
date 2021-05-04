@@ -56,3 +56,5 @@ error: {"flag":false,"message":"password not matched !","code":401} {"timestamp"
 error: {"flag":false,"message":"Data with this Email doesnot exits !","code":404} {"timestamp":"29-04-2021 15:33:52"}
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"HelloMini12@","msg":"Password Max contains  11 character!","param":"password","location":"body"}]} {"timestamp":"29-04-2021 15:37:11"}
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"HelloMini12@","msg":"Password Max contains  11 character!","param":"password","location":"body"}]} {"timestamp":"29-04-2021 15:37:23"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"04-05-2021 18:42:17"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"04-05-2021 18:42:21"}

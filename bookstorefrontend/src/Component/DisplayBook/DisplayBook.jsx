@@ -8,6 +8,7 @@ import Select from "@material-ui/core/Select";
 import Pagination from "../Pagination/Pagination";
 import Services from '../../Services/bookService'
 
+
 const service = new Services()
 
 
@@ -102,7 +103,7 @@ export default function DisplayNotes(props) {
             setData(data.data.data);
             books.map((data))
         }).catch((error) => {
-            console.log("error");
+            console.log("error", error);
         })
     };
 
