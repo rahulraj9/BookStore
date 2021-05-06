@@ -8,8 +8,7 @@ import Cart from "../Cart/Cart"
 import ProtectedRoutes from "../protectedRoutes/protectedRoutes"
 import PlacedOrder from '../OrderPlaced/orderPlaced'
 import services from '../../Services/bookService'
-import { connect } from 'react-redux';
-import { GetBook } from '../redux/actions/action'
+
 
 const service = new services()
 
