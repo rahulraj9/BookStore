@@ -7,6 +7,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Pagination from "../Pagination/Pagination";
 import Services from '../../Services/bookService'
+import * as action from '../redux/actions/action'
+import { connect, useDispatch, useSelector } from 'react-redux'
 
 const service = new Services()
 
@@ -70,11 +72,11 @@ const useStyles = makeStyles((theme) => ({
         height: "34px",
         marginTop: "-14px",
         padding: "3px 4px 3px 4px",
-        fontSize:"13px",
-        fontWeight:"bold",
+        fontSize: "13px",
+        fontWeight: "bold",
         borderRadius: "2px",
         backgroundColor: "white",
-        border :"1px solid gray"
+        border: "1px solid gray"
     },
 
     optionSelect: {
@@ -82,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function DisplayNotes(props) {
+function DisplayNotes(props) {
     const classes = useStyles();
     const [books, setBooks] = React.useState([]);
     const [data, setData] = React.useState(0);
@@ -92,19 +94,19 @@ export default function DisplayNotes(props) {
 
 
     React.useEffect(() => {
-        getAllBooks();
+        props.getBooks();
     }, []);
 
-    const getAllBooks = () => {
-        service.getbook().then((data) => {
-            console.log("data is ", data);
-            setBooks(data.data.data);
-            setData(data.data.data);
-            books.map((data))
-        }).catch((error) => {
-            console.log("error");
-        })
-    };
+    // const getAllBooks = () => {
+    //     service.getbook().then((data) => {
+    //         console.log("data is ", data);
+    //         setBooks(data.data.data);
+    //         setData(data.data.data);
+    //         books.map((data))
+    //     }).catch((error) => {
+    //         console.log("error");
+    //     })
+    // };
 
 
     const handleChange = (event) => {
@@ -146,11 +148,11 @@ export default function DisplayNotes(props) {
         setCurrentPage(pageNumber);
     };
 
-  
+
     const indexOfLastBook = currentPage * postsPerPage;
     const indexOfFirstBook = indexOfLastBook - postsPerPage;
     const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
-  
+
 
     return (
         <div className="displayBook">
@@ -178,9 +180,13 @@ export default function DisplayNotes(props) {
                 </div>
             </span>
             <div className="allBooks">
-                {currentBooks.map((data) => (
+                {props.Books.books.map((data) => (
                     <div className="bookContainer">
-
+                        {props.cartBooks.map((cart) => {
+                            if (cart.book_ID._id === data._id) {
+                                data.isCart = true;
+                            }
+                        })}
                         <div className="imageContainer">
                             <img className="bookImage" src={data.bookImgUrl} alt="" />
                         </div>
@@ -205,45 +211,51 @@ export default function DisplayNotes(props) {
                             </Button>
                         ) : data.quantity == 0 ? (
                             <>
-                            <Button variant="contained" className={classes.ouOfStockButton}>
-                                Out of Stock
+                                <Button variant="contained" className={classes.ouOfStockButton}>
+                                    Out of Stock
                             </Button>
-                            <Button variant="contained" className={classes.outwishListButton}>
-                            WishList
+                                <Button variant="contained" className={classes.outwishListButton}>
+                                    WishList
                             </Button>
                             </>
-                            )
-                           : (
-                            <div className="buttonContainer">
-                    <Button
-                        variant="contained"
-                        onClick={(e) => addedToCart(e, data)}
-                        className={classes.addToBagButton}
-                    >
-                        Add to cart
+                        )
+                            : (
+                                <div className="buttonContainer">
+                                    <Button
+                                        variant="contained"
+                                        onClick={(e) => addedToCart(e, data)}
+                                        className={classes.addToBagButton}
+                                    >
+                                        Add to cart
                                 </Button>
-                    <Button variant="outlined"
-                        className={classes.wishListButton}
+                                    <Button variant="outlined"
+                                        className={classes.wishListButton}
 
-                    >
-                        WishList
+                                    >
+                                        WishList
                                 </Button>
-                </div>
+                                </div>
 
-                        )}
+                            )}
                         <div className="descClass">
-                    <Typography className={classes.bookName}>Book Details</Typography>
-                    <Typography className={classes.bookName}>{data.bookname}</Typography>
-                    {data.description}
-                </div>
-            </div>
+                            <Typography className={classes.bookName}>Book Details</Typography>
+                            <Typography className={classes.bookName}>{data.bookname}</Typography>
+                            {data.description}
+                        </div>
+                    </div>
                 ))}
-            <Pagination
-                postsPerPage={postsPerPage}
-                totalPosts={books.length}
-                paginate={paginate}
-            ></Pagination>
-        </div>
+                <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={books.length}
+                    paginate={paginate}
+                ></Pagination>
+            </div>
         </div >
     );
 }
+const mapDispatchToProps = (state) => {
+    return state;
+  }
+  
+  export default connect(mapDispatchToProps, action)(DisplayNotes);
+  
