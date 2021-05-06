@@ -103,7 +103,7 @@ export default function DisplayNotes(props) {
             setData(data.data.data);
             books.map((data))
         }).catch((error) => {
-            console.log("error", error);
+            console.log("error");
         })
     };
 
