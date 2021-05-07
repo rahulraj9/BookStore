@@ -7,14 +7,12 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Pagination from "../Pagination/Pagination";
 import Services from '../../Services/bookService'
-import * as action from '../Redux/Action/action'
+
+import * as action from '../redux/actions/action'
+
 import { connect, useDispatch, useSelector } from 'react-redux'
 
-
 const service = new Services()
-
-
-
 const useStyles = makeStyles((theme) => ({
     bookName: {
         fontSize: "13px",
@@ -85,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function DisplayNotes(props) {
+function DisplayBooks(props) {
     const classes = useStyles();
     const [books, setBooks] = React.useState([]);
     const [data, setData] = React.useState(0);
@@ -95,15 +93,15 @@ function DisplayNotes(props) {
 
 
     React.useEffect(() => {
-        props.getBooks();
 
+        props.getBooks();
     }, []);
 
     // const getAllBooks = () => {
     //     service.getbook().then((data) => {
     //         console.log("data is ", data);
-    //         // setBooks(data.data.data);
-    //         // setData(data.data.data);
+    //         setBooks(data.data.data);
+    //         setData(data.data.data);
     //         books.map((data))
     //     }).catch((error) => {
     //         console.log("error");
@@ -148,19 +146,22 @@ function DisplayNotes(props) {
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
+        
     };
 
 
+    // const currentBooks=;
     const indexOfLastBook = currentPage * postsPerPage;
     const indexOfFirstBook = indexOfLastBook - postsPerPage;
-    const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+    const currentBooks = props.Books.books.slice(indexOfFirstBook, indexOfLastBook)
+    console.log("indexOfFirstBook",indexOfFirstBook,indexOfLastBook)
 
 
     return (
         <div className="displayBook">
             <span className="topContent">
                 <div>
-                    Books <font className="bookSize"> ({books.length} items) </font>{" "}
+                    Books <font className="bookSize"> ({props.Books.books.length} items) </font>{" "}
                 </div>
                 <div>
                     <FormControl variant="outlined" className={classes.formControl}>
@@ -171,8 +172,7 @@ function DisplayNotes(props) {
                             onChange={handleChange}
                             inputProps={{
                                 name: "type",
-                            }}
-                        >
+                            }} >
                             <option value={0}>Sort by relevance</option>
                             <option value={1}>Price: low to high</option>
                             <option value={2}>Price: high to low</option>
@@ -182,14 +182,13 @@ function DisplayNotes(props) {
                 </div>
             </span>
             <div className="allBooks">
-                {props.Books.books.map((data) => (
+                {currentBooks.map((data) => (
                     <div className="bookContainer">
                         {props.cartBooks.map((cart) => {
                             if (cart.book_ID._id === data._id) {
                                 data.isCart = true;
                             }
                         })}
-
                         <div className="imageContainer">
                             <img className="bookImage" src={data.bookImgUrl} alt="" />
                         </div>
@@ -249,16 +248,16 @@ function DisplayNotes(props) {
                 ))}
                 <Pagination
                     postsPerPage={postsPerPage}
-                    totalPosts={books.length}
+                    totalPosts={props.Books.books.length}
                     paginate={paginate}
                 ></Pagination>
             </div>
         </div >
     );
 }
-
 const mapDispatchToProps = (state) => {
     return state;
-}
-
-export default connect(mapDispatchToProps, action)(DisplayNotes);
+  }
+  
+  export default connect(mapDispatchToProps, action)(DisplayBooks);
+  
